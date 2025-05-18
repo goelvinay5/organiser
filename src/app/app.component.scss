@@ -1,13 +1,15 @@
 .app-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
 
 .content {
-  margin-left: 250px; // Match the navigation width
+  margin-left: 250px;
   flex: 1;
   padding: 2rem;
   background-color: #ffffff;
+  overflow-y: auto;
   min-height: 100vh;
 }
