@@ -1,0 +1,113 @@
+<div class="time-quadrant-container">
+  <h1>Time Quadrant</h1>
+  
+  <div class="quadrant-grid">
+    <div class="quadrant important urgent">
+      <h2>Quadrant 1 - Important & Urgent</h2>
+      <p class="subtitle">Source - Making Living, Todos for earning Bread</p>
+      <div class="ag-theme-alpine" style="height: 200px; width: 100%;">
+        <ag-grid-angular
+          [rowData]="q1Tasks()"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+      <button class="add-task-btn" (click)="addTask(1)">Add Task</button>
+    </div>
+
+    <div class="quadrant important not-urgent">
+      <h2>Quadrant 2 - Important & Not Urgent</h2>
+      <p class="subtitle">Source - Goals List</p>
+      <div class="task-categories">
+        <h3>Learning Tasks</h3>
+        <h3>Health Routine</h3>
+        <h3>Learn to Survive</h3>
+        <h3>Learn to be Smart</h3>
+        <h3>Hobby</h3>
+      </div>
+      <div class="ag-theme-alpine" style="height: 200px; width: 100%;">
+        <ag-grid-angular
+          [rowData]="q2Tasks()"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+      <button class="add-task-btn" (click)="addTask(2)">Add Task</button>
+    </div>
+
+    <div class="quadrant not-important urgent">
+      <h2>Quadrant 3 - Not Important & Urgent</h2>
+      <p class="subtitle">Source - Routine tasks/ Nice person</p>
+      <div class="ag-theme-alpine" style="height: 200px; width: 100%;">
+        <ag-grid-angular
+          [rowData]="q3Tasks()"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+      <button class="add-task-btn" (click)="addTask(3)">Add Task</button>
+    </div>
+
+    <div class="quadrant not-important not-urgent">
+      <h2>Quadrant 4 - Not Important & Not Urgent</h2>
+      <p class="subtitle">Source - Seeking Pleasure</p>
+      <div class="ag-theme-alpine" style="height: 200px; width: 100%;">
+        <ag-grid-angular
+          [rowData]="q4Tasks()"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+      <button class="add-task-btn" (click)="addTask(4)">Add Task</button>
+    </div>
+  </div>
+
+  <!-- Task Form Dialog -->
+  <dialog #taskDialog class="task-dialog">
+    <form #taskForm="ngForm" (ngSubmit)="onSubmitTask()">
+      <h3>Add Task to Quadrant {{selectedQuadrant}}</h3>
+      
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" [(ngModel)]="newTask.title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" [(ngModel)]="newTask.description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority" [(ngModel)]="newTask.priority" required>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" [(ngModel)]="newTask.category" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input type="date" id="dueDate" name="dueDate" [(ngModel)]="newTask.dueDate">
+      </div>
+
+      <div class="dialog-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+</div>

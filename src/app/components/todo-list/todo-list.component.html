@@ -1,0 +1,56 @@
+<div class="todo-container">
+  <header class="todo-header">
+    <h1>To Do List</h1>
+    <button class="add-task-btn" (click)="openAddTaskDialog()">Add Task</button>
+  </header>
+
+  <app-task-list
+    [tasks]="tasks()"
+    [columnDefs]="columnDefs"
+    [showTags]="true"
+    (taskUpdate)="onTaskUpdate($event)"
+    (taskDelete)="onTaskDelete($event)"
+    (selectionChange)="onSelectionChange($event)"
+    (filterChange)="onFilterChange($event)">
+  </app-task-list>
+
+  <dialog #taskDialog class="task-dialog">
+    <form #taskForm="ngForm" (ngSubmit)="onSubmitTask()">
+      <h3>{{ editingTask ? 'Edit Task' : 'Add New Task' }}</h3>
+      
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" [(ngModel)]="newTask.title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" [(ngModel)]="newTask.description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority" [(ngModel)]="newTask.priority" required>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input type="date" id="dueDate" name="dueDate" [(ngModel)]="newTask.dueDate">
+      </div>
+
+      <div class="form-group">
+        <label for="tags">Tags (comma separated)</label>
+        <input type="text" id="tags" name="tags" [(ngModel)]="tagInput" placeholder="Enter tags...">
+      </div>
+
+      <div class="dialog-buttons">
+        <button type="submit">{{ editingTask ? 'Update' : 'Add' }}</button>
+        <button type="button" (click)="closeDialog()">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+</div>
